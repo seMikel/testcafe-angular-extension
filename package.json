@@ -1,0 +1,23 @@
+{
+  "name": "testcafe-angular-extension",
+  "version": "0.0.1",
+  "description": "An extension for testcafe with hierarchical page components and angular selectors",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build" : "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seMikel/testcafe-angular-extension"
+  },
+  "author": "seMikel",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "testcafe": "^1.5.0"
+  },
+  "files": ["lib/**/*"]
+}
