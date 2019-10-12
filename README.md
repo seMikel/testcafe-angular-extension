@@ -17,7 +17,7 @@ To create page object hierarchies and custom elements either extend the Page cla
 ## Examples
 
 ```js
-import { Page, t } from 'testcafe-angular-extension';
+import { Page } from 'testcafe-angular-extension';
 
 class LoginPage extends Page {
     welcomeMessage = this.selector('h1');
@@ -25,7 +25,7 @@ class LoginPage extends Page {
     password = this.extendedSelector(TextInput, '#password');
 }
 
-class CustomTextInput {
+class TextInput {
 
     public readonly input: Selector;
 
