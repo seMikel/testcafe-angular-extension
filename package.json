@@ -1,11 +1,13 @@
 {
   "name": "testcafe-angular-extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An extension for testcafe with hierarchical page components and angular selectors",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build" : "tsc"
+    "build": "tsc",
+    "build-angular": "ng build test-app",
+    "test": "testcafe \"chrome --allow-file-access-from-files --allow-file-access --allow-cross-origin-auth-prompt\" test/tests/test.ts --app \"http-server ./dist/test-app -s\""
   },
   "repository": {
     "type": "git",
@@ -13,11 +15,35 @@
   },
   "author": "seMikel",
   "license": "ISC",
-  "devDependencies": {
-    "typescript": "^3.6.4"
-  },
   "dependencies": {
     "testcafe": "^1.5.0"
   },
-  "files": ["lib/**/*"]
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.803.9",
+    "@angular/animations": "~8.2.9",
+    "@angular/cli": "~8.3.9",
+    "@angular/common": "~8.2.9",
+    "@angular/compiler": "~8.2.9",
+    "@angular/compiler-cli": "~8.2.9",
+    "@angular/core": "~8.2.9",
+    "@angular/forms": "~8.2.9",
+    "@angular/language-service": "~8.2.9",
+    "@angular/platform-browser": "~8.2.9",
+    "@angular/platform-browser-dynamic": "~8.2.9",
+    "@angular/router": "~8.2.9",
+    "@types/node": "~8.9.4",
+    "codelyzer": "^5.0.0",
+    "devextreme": "^19.1.6",
+    "devextreme-angular": "^19.1.6",
+    "http-server": "^0.11.1",
+    "rxjs": "~6.4.0",
+    "ts-node": "~7.0.0",
+    "tslib": "^1.10.0",
+    "tslint": "~5.15.0",
+    "typescript": "~3.5.3",
+    "zone.js": "~0.9.1"
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }

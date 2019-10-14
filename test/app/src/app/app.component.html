@@ -1,0 +1,18 @@
+<div class="text-inputs">
+  <dx-text-box id="dx-input"></dx-text-box>
+  <input id="native-input" type="text">
+</div>
+<div class="buttons">
+  <dx-button id="dx-button" text="Dx Button"></dx-button>
+  <button id="native-button">Native Button</button>
+</div>
+<div class="checkboxes">
+  <dx-check-box id="dx-checkbox" text="Dx Check Box"></dx-check-box>
+  <input id="native-checkbox" type="checkbox">Native Check Box
+</div>
+<div class="selects">
+  <dx-select-box id="dx-select" [items]="items"></dx-select-box>
+  <select id="native-select">
+    <option *ngFor="let item of items">{{item}}</option>
+  </select>
+</div>
