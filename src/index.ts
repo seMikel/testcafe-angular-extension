@@ -7,7 +7,7 @@ export class Page {
         if (_selector) {
             this._selector = _selector;
         } else {
-            this._selector = Selector((<any>window).getAllAngularRootElements ? () => <HTMLElement>(<any>window).getAllAngularRootElements()[0] : 'body');
+            this._selector = Selector(() => <HTMLElement>(<any>window).getAllAngularRootElements()[0]);
         }
     }
 
