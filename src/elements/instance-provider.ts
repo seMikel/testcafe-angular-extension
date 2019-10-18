@@ -1,10 +1,10 @@
-export type Check<T> = (selector: Selector) => Promise<{ new(selector: Selector): T } | void>;
+export type Check<T> = (selector: Selector) => Promise<(new(selector: Selector) => T) | void>;
 
 export class InstanceProvider<T> {
 
     private checks: Check<T>[] = [];
 
-    constructor(private def: { new(selector: Selector): T }) { }
+    constructor(private def: new(selector: Selector) => T) { }
 
     addEntityCheck(check: Check<T>) {
         this.checks.push(check);

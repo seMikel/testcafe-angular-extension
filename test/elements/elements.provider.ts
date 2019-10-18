@@ -6,10 +6,13 @@ import { Select } from "../../src/elements/select";
 import { DxCheckBoxCheck } from "./dx-checkbox";
 import { DxButonCheck } from "./dx-button";
 import { DxSelectCheck } from "./dx-select";
+import { DxTagBoxCheck } from "./dx-tagbox";
+import { MultiSelect } from "../../src/elements/multi-select";
 
 export async function registerDxElements() {
     TextInput.addCheck(DxTextInputCheck);
     CheckBox.addCheck(DxCheckBoxCheck);
     Button.addCheck(DxButonCheck);
     Select.addCheck(DxSelectCheck);
+    MultiSelect.addCheck(DxTagBoxCheck);
 }

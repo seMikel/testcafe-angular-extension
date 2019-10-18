@@ -16,3 +16,9 @@
     <option *ngFor="let item of items">{{item}}</option>
   </select>
 </div>
+<div class="multi-selects">
+  <dx-tag-box id="dx-tagbox" [items]="items"></dx-tag-box>
+  <select multiple id="multi-select">
+    <option *ngFor="let item of items">{{item}}</option>
+  </select>
+</div>

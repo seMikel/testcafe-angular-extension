@@ -58,7 +58,8 @@
                   "maximumError": "10kb"
                 }
               ]
-            }
+            },
+            "test": {}
           }
         },
         "serve": {

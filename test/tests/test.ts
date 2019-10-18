@@ -23,4 +23,8 @@ test('Test page', async t => {
     await t.expect(await TestPage.dxSelect.getSelection()).eql('Two');
     await TestPage.select.select('Three');
     await t.expect(await TestPage.select.getSelection()).eql('Three');
+
+    await TestPage.dxTagBox.select('Two');
+    await TestPage.dxTagBox.select('Three', true);
+    await t.expect(await TestPage.dxTagBox.getSelection()).contains('Two', 'Three');
 });

@@ -1,5 +1,7 @@
 import { Selector, ClientFunction } from 'testcafe';
 
+let isAngularInDebug = false;
+
 export class Page {
     private _selector: Selector;
 
@@ -7,7 +9,7 @@ export class Page {
         if (_selector) {
             this._selector = _selector;
         } else {
-            this._selector = Selector(() => <HTMLElement>(<any>window).getAllAngularRootElements()[0]);
+            this._selector = isAngularInDebug ? Selector(() => <HTMLElement>(<any>window).getAllAngularRootElements()[0]) : Selector('body');
         }
     }
 
@@ -19,7 +21,7 @@ export class Page {
         return Selector(this._selector, options).find(cssSelector);
     }
 
-    public extendedSelector<T>(type: { new(selector: Selector): T ;}, cssSelector: string, options?: SelectorOptions) {
+    public extendedSelector<T>(type: new(selector: Selector) => T, cssSelector: string, options?: SelectorOptions) {
         return new type(Selector(this._selector, options).find(cssSelector));
     }
 
@@ -48,7 +50,7 @@ export const awaitAngularLoad = ClientFunction((time = 10000) => {
 
     const interval = 100;
 
-    return new Promise((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
 
         let timer: NodeJS.Timer;
         let timeout: NodeJS.Timer;
@@ -65,14 +67,15 @@ export const awaitAngularLoad = ClientFunction((time = 10000) => {
         const check = () => {
             if (isAngularLoaded()) {
                 stop();
-                resolve();
+                isAngularInDebug = true;
+                resolve(true);
             }
         };
 
         timer = setInterval(check, interval);
         timeout = setTimeout(() => {
             stop();
-            reject(new Error('No Angular development instance was found in the window'));
+            resolve(false);
         }, time);
     });
 });
