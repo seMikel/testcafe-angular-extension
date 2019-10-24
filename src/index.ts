@@ -2,7 +2,7 @@ import { Selector, ClientFunction } from 'testcafe';
 
 let isAngularInDebug = false;
 
-export class Page {
+export class PageObject {
     private _selector: Selector;
 
     constructor(_selector?: Selector) {
@@ -21,12 +21,16 @@ export class Page {
         return Selector(this._selector, options).find(cssSelector);
     }
 
-    public extendedSelector<T>(type: new(selector: Selector) => T, cssSelector: string, options?: SelectorOptions) {
-        return new type(Selector(this._selector, options).find(cssSelector));
+    public extendedSelector<T>(type: new(selector: Selector) => T, selector: string | Selector, options?: SelectorOptions) {
+        return new type(this.getSelector(selector, options));
     }
 
-    public angularSelector<T>(cssSelector: string, options?: SelectorOptions) {
-        return AngularSelector<T>(Selector(this._selector, options).find(cssSelector), options);
+    public angularSelector<T>(selector: string | Selector, options?: SelectorOptions) {
+        return AngularSelector<T>(this.getSelector(selector, options), options);
+    }
+
+    private getSelector(selector: string | Selector, options?: SelectorOptions) {
+        return typeof selector === 'string' ? Selector(this._selector, options).find(selector) : Selector(selector, options);
     }
 }
 

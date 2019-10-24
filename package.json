@@ -1,6 +1,6 @@
 {
   "name": "testcafe-angular-extension",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "An extension for testcafe with hierarchical page components and angular selectors",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
