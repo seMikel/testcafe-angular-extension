@@ -1,11 +1,12 @@
 {
   "name": "testcafe-angular-extension",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "An extension for testcafe with hierarchical page components and angular selectors",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "build-publish": "npm run build && npm publish",
     "start-angular": "ng serve test-app --port=8080",
     "build-angular": "ng build test-app --configuration=test",
     "test": "npm run build-angular && testcafe \"chrome --allow-file-access-from-files --allow-file-access --allow-cross-origin-auth-prompt\" test/tests/test.ts --app \"http-server ./dist/test-app -s\""
