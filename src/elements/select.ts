@@ -4,7 +4,7 @@ import { BaseElement } from "./base";
 
 export interface ASelect {
     selector: Selector;
-    select(text: string): Promise<void>;
+    select(option: string | number): Promise<void>;
     getSelection(): Promise<string | undefined>;
     getOptions(): Promise<string[]>;
 }
@@ -12,8 +12,9 @@ export interface ASelect {
 export class NativeSelect implements ASelect {
     constructor(public selector: Selector) { }
 
-    async select(text: string) {
-        return await t.click(this.selector).click(this.selector.child().withExactText(text));
+    async select(option: string | number) {
+        const selector = typeof option === 'string' ? this.selector.child().withExactText(option) : this.selector.child(option);
+        return await t.click(this.selector).click(selector);
     }
     async getSelection() {
         return await this.selector.value;
@@ -38,8 +39,8 @@ export class Select extends BaseElement<ASelect> implements ASelect {
         return Select._instanceProvider;
     }
 
-    async select(text: string) {
-        return (await this.instance).select(text);
+    async select(option: string | number) {
+        return (await this.instance).select(option);
     }
     async getSelection() {
         return (await this.instance).getSelection();

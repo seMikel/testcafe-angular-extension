@@ -8,12 +8,14 @@ class DxTagBox implements AMultiSelect {
     
     constructor(public selector: Selector) { }
 
-    async select(text: string, preserve = true) {
+    async select(option: string | number, preserve = true) {
         if (!preserve) {
             await this.deselectAll();
         }
         await t.click(this.selector.find('.dx-texteditor-input-container'));
-        await t.click((await this.getPopup()).find('.dx-item-content').withExactText(text));
+        const popup = await this.getPopup();
+        const selector = typeof option === 'string' ? popup.child().find('.dx-item-content').withExactText(option) : popup.child().find('.dx-item-content').nth(option)
+        await t.click(selector);
     }
 
     async getSelection() {

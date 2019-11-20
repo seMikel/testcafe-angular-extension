@@ -8,9 +8,11 @@ class DxSelect implements ASelect {
     
     constructor(public selector: Selector) { }
 
-    async select(text: string) {
+    async select(option: string | number) {
         await t.click(this.selector.find('.dx-texteditor-input'));
-        await t.click((await this.getPopup()).find('.dx-item-content').withExactText(text));
+        const popup = await this.getPopup();
+        const selector = typeof option === 'string' ? popup.find('.dx-item-content').withExactText(option) : popup.find('.dx-item-content').nth(option);
+        await t.click(selector);
     }
 
     async getSelection() {

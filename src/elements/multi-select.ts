@@ -4,7 +4,7 @@ import { BaseElement } from "./base";
 
 export interface AMultiSelect {
     selector: Selector;
-    select(text: string, preserve?: boolean): Promise<void>;
+    select(text: string | number, preserve?: boolean): Promise<void>;
     getSelection(): Promise<string[] | undefined>;
     getOptions(): Promise<string[]>;
     deselect(...options: string[]): Promise<void>;
@@ -14,9 +14,10 @@ export interface AMultiSelect {
 export class NativeMultiSelect implements AMultiSelect {
     constructor(public selector: Selector) { }
 
-    async select(text: string, preserve = true) {
+    async select(option: string | number, preserve = true) {
         const options = preserve ? { modifiers: { ctrl: true } } : {};
-        return await t.click(await this.selector.child('option').withExactText(text)(), options);
+        const selector = typeof option === 'string' ? this.selector.child('option').withExactText(option) : this.selector.child('option').nth(option)
+        return await t.click(selector, options);
     }
     async getSelection() {
         const selectedOptions = this.selector.find('option').filter((node) => {
@@ -78,8 +79,8 @@ export class MultiSelect extends BaseElement<AMultiSelect> implements AMultiSele
         return MultiSelect._instanceProvider;
     }
 
-    async select(text: string, preserve?: boolean) {
-        return (await this.instance).select(text);
+    async select(option: string | number, preserve?: boolean) {
+        return (await this.instance).select(option, preserve);
     }
     async getSelection() {
         return (await this.instance).getSelection();
